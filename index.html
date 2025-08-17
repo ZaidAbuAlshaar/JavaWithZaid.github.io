@@ -290,6 +290,20 @@
             .menu-toggle {
                 display: block;
             }
+            
+            /* Mobile-specific adjustments */
+            .hero .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-img-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .level-card {
+                height: auto;
+            }
         }
         
         /* Footer */
@@ -531,9 +545,91 @@
             padding: 2rem;
             margin-top: 2rem;
         }
+        
+        /* Popup styling */
+        #desktop-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .popup-content {
+            background: var(--primary-medium);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .popup-close:hover {
+            color: var(--accent-color);
+            transform: rotate(90deg);
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .popup-message {
+            font-size: 18px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .popup-icon {
+            font-size: 48px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body class="bg-primary-dark">
+    <!-- Desktop Recommendation Popup -->
+    <div id="desktop-popup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="popup-icon">
+                <i class="fas fa-laptop"></i>
+            </div>
+            <h3 class="popup-title">نصيحة من زيد أبو الشعر</h3>
+            <p class="popup-message">
+                للحصول على أفضل تجربة تعليمية، ننصحك باستخدام الموقع من جهاز الحاسوب. 
+                ستحصل على واجهة أفضل وتجربة تعليمية أكثر تفاعلية ووضوحاً.
+            </p>
+            <button class="btn-primary" onclick="closePopup()">
+                فهمت، شكراً
+            </button>
+        </div>
+    </div>
+    
     <!-- Background Pattern -->
     <div class="bg-pattern"></div>
     
@@ -771,7 +867,9 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div class="flex justify-center">
                             <div class="profile-img-container">
-                                <img src="6U8A0156_1_11zon.jpg" alt="Zaid Abu Al Shaar" class="profile-img">
+                                <div class="w-full h-full bg-gray-700 rounded-full flex items-center justify-center text-5xl text-accent-color">
+                                    <i class="fas fa-user"></i>
+                                </div>
                             </div>
                         </div>
                         
@@ -805,14 +903,14 @@
                                     <li>Java - مستوى متقدم</li>
                                     <li>C# - مستوى متقدم</li>
                                     <li>JavaScript - مستوى متقدم</li>
-                                    <li>Python - مستوى متوسط</li>
+                                    <li>Python - مستوى متقدم</li>
                                 </ul>
                             </div>
                             
                             <div class="card p-6">
                                 <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-graduation-cap mr-2"></i> التعليم</h4>
                                 <ul class="text-text-secondary space-y-2">
-                                    <li>بكالوريوس علوم الحاسوب - جامعة البتراء</li>
+                                    <li>بكالوريوس علوم الحاسوب \الواقع الافتراضي والمعزز - جامعة البتراء</li>
                                     <li>الأول على الدفعة مع مرتبة الشرف</li>
                                     <li>دورات متقدمة في الذكاء الاصطناعي</li>
                                 </ul>
@@ -1140,6 +1238,14 @@ public class DataTypesExample {
                             </div>
                         </div>
                         
+                        <!-- Additional Resources Section -->
+                        <div class="mt-8">
+                            <h4 class="text-lg font-bold text-white mb-4">الموارد الإضافية</h4>
+                            <div id="additional-resources" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Resources will be added by JavaScript -->
+                            </div>
+                        </div>
+                        
                         <div class="quiz-container mt-12">
                             <h3 class="text-xl font-bold text-accent-color mb-6">اختبر معلوماتك</h3>
                             <p class="text-text-secondary mb-4" id="quiz-question">ما هي الكلاس المستخدم لأخذ مدخلات من المستخدم في جافا؟</p>
@@ -1276,7 +1382,7 @@ public class DataTypesExample {
     </button>
     
     <script>
-        // بيانات المستويات والأسئلة
+        // بيانات المستويات والأسئلة والموارد
         const levelsData = {
             1: {
                 title: "المستوى 1: أنواع البيانات والإدخال",
@@ -1313,7 +1419,19 @@ public class DataTypesExample {
 }`,
                 quizQuestion: "ما هي الكلاس المستخدم لأخذ مدخلات من المستخدم في جافا؟",
                 quizOptions: ["Scanner", "Input", "Reader", "System.in"],
-                correctAnswer: "Scanner"
+                correctAnswer: "Scanner",
+                resources: [
+                    {
+                        title: "أنواع البيانات في جافا",
+                        url: "https://www.w3schools.com/java/java_data_types.asp",
+                        description: "شرح مفصل لأنواع البيانات الأساسية في جافا مع أمثلة"
+                    },
+                    {
+                        title: "أخذ المدخلات من المستخدم",
+                        url: "https://www.w3schools.com/java/java_user_input.asp",
+                        description: "كيفية استخدام Scanner لأخذ المدخلات من المستخدم"
+                    }
+                ]
             },
             2: {
                 title: "المستوى 2: المتغيرات والتعبيرات",
@@ -1355,7 +1473,19 @@ public class DataTypesExample {
 }`,
                 quizQuestion: "ما هو ناتج العملية الحسابية: 10 % 3؟",
                 quizOptions: ["1", "0", "3", "10"],
-                correctAnswer: "1"
+                correctAnswer: "1",
+                resources: [
+                    {
+                        title: "المتغيرات في جافا",
+                        url: "https://www.w3schools.com/java/java_variables.asp",
+                        description: "شرح شامل للمتغيرات في جافا وكيفية استخدامها"
+                    },
+                    {
+                        title: "التعبيرات الحسابية",
+                        url: "https://www.w3schools.com/java/java_operators.asp",
+                        description: "دليل شامل للمعاملات الحسابية في جافا"
+                    }
+                ]
             },
             3: {
                 title: "المستوى 3: المعاملات",
@@ -1395,7 +1525,19 @@ public class DataTypesExample {
 }`,
                 quizQuestion: "ما هو ناتج العملية: (10 > 5) && (3 < 2)؟",
                 quizOptions: ["true", "false", "خطأ في الصياغة", "null"],
-                correctAnswer: "false"
+                correctAnswer: "false",
+                resources: [
+                    {
+                        title: "المعاملات في جافا",
+                        url: "https://www.w3schools.com/java/java_operators.asp",
+                        description: "دليل شامل لجميع أنواع المعاملات في جافا"
+                    },
+                    {
+                        title: "أسبقية المعاملات",
+                        url: "https://www.w3schools.com/java/java_operators_precedence.asp",
+                        description: "ترتيب تنفيذ المعاملات في التعبيرات المعقدة"
+                    }
+                ]
             },
             4: {
                 title: "المستوى 4: التحكم بالتدفق",
@@ -1458,7 +1600,19 @@ public class ControlFlowExample {
 }`,
                 quizQuestion: "أي من الجمل التالية تستخدم للخروج من حالة switch؟",
                 quizOptions: ["break", "continue", "return", "exit"],
-                correctAnswer: "break"
+                correctAnswer: "break",
+                resources: [
+                    {
+                        title: "الجمل الشرطية في جافا",
+                        url: "https://www.w3schools.com/java/java_conditions.asp",
+                        description: "شرح مفصل للجمل الشرطية if و switch"
+                    },
+                    {
+                        title: "الجمل الشرطية المتداخلة",
+                        url: "https://www.w3schools.com/java/java_conditions_shorthand.asp",
+                        description: "كيفية استخدام الجمل الشرطية المتداخلة بشكل فعال"
+                    }
+                ]
             },
             5: {
                 title: "المستوى 5: الحلقات التكرارية",
@@ -1506,7 +1660,19 @@ public class ControlFlowExample {
 }`,
                 quizQuestion: "أي حلقة تضمن تنفيذ الكود مرة واحدة على الأقل؟",
                 quizOptions: ["for", "while", "do-while", "جميعهم"],
-                correctAnswer: "do-while"
+                correctAnswer: "do-while",
+                resources: [
+                    {
+                        title: "حلقات التكرار في جافا",
+                        url: "https://www.w3schools.com/java/java_while_loop.asp",
+                        description: "شرح شامل لأنواع الحلقات التكرارية في جافا"
+                    },
+                    {
+                        title: "التحكم في الحلقات",
+                        url: "https://www.w3schools.com/java/java_break.asp",
+                        description: "كيفية استخدام break و continue للتحكم في الحلقات"
+                    }
+                ]
             },
             6: {
                 title: "المستوى 6: المصفوفات",
@@ -1552,7 +1718,19 @@ public class ControlFlowExample {
 }`,
                 quizQuestion: "كيف يمكن الحصول على طول المصفوفة في جافا؟",
                 quizOptions: ["array.size", "array.length", "array.count", "array.getSize()"],
-                correctAnswer: "array.length"
+                correctAnswer: "array.length",
+                resources: [
+                    {
+                        title: "المصفوفات في جافا",
+                        url: "https://www.w3schools.com/java/java_arrays.asp",
+                        description: "دليل شامل للتعامل مع المصفوفات في جافا"
+                    },
+                    {
+                        title: "المصفوفات متعددة الأبعاد",
+                        url: "https://www.w3schools.com/java/java_arrays_multi.asp",
+                        description: "شرح للمصفوفات متعددة الأبعاد وكيفية استخدامها"
+                    }
+                ]
             }
         };
 
@@ -1627,6 +1805,29 @@ public class ControlFlowExample {
                 
                 // Reset quiz result
                 document.getElementById('quiz-result').classList.add('hidden');
+                
+                // Update additional resources
+                const resourcesContainer = document.getElementById('additional-resources');
+                resourcesContainer.innerHTML = '';
+                
+                if (levelData.resources && levelData.resources.length > 0) {
+                    levelData.resources.forEach(resource => {
+                        const resourceElement = document.createElement('div');
+                        resourceElement.className = 'resource-card p-4 rounded-lg bg-primary-light';
+                        resourceElement.innerHTML = `
+                            <a href="${resource.url}" target="_blank" class="flex items-start text-accent-color hover:text-white transition-colors">
+                                <i class="fas fa-external-link-alt mt-1 mr-3"></i>
+                                <div>
+                                    <div class="font-bold">${resource.title}</div>
+                                    <div class="text-sm text-text-secondary mt-1">${resource.description}</div>
+                                </div>
+                            </a>
+                        `;
+                        resourcesContainer.appendChild(resourceElement);
+                    });
+                } else {
+                    resourcesContainer.innerHTML = '<p class="text-text-secondary">لا توجد موارد إضافية متاحة لهذا المستوى حالياً.</p>';
+                }
             }
         }
         
@@ -1657,6 +1858,11 @@ public class ControlFlowExample {
             
             // Show result
             document.getElementById('quiz-result').classList.remove('hidden');
+        }
+        
+        // Close popup
+        function closePopup() {
+            document.getElementById('desktop-popup').style.display = 'none';
         }
         
         // Back to top button
@@ -1708,6 +1914,11 @@ public class ControlFlowExample {
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
+            
+            // Hide popup after 10 seconds
+            setTimeout(() => {
+                document.getElementById('desktop-popup').style.display = 'none';
+            }, 10000);
         });
     </script>
 </body>
