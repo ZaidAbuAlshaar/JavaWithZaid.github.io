@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zaid.java - تعلم جافا مع زيد</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1298,7 +1298,8 @@ public class DataTypesExample {
                     
                     <div class="bg-primary-medium rounded-2xl p-6">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/mG4NLNZ37y4" frameborder="0" allowfullscreen></iframe>
+                            <!-- إضافة معرف للفيديو لتتمكن من التحكم به -->
+                            <iframe id="intro-video" src="https://www.youtube.com/embed/mG4NLNZ37y4" frameborder="0" allowfullscreen></iframe>
                         </div>
                         
                         <div class="mt-8">
@@ -1736,6 +1737,12 @@ public class ControlFlowExample {
 
         // Page navigation
         function changePage(pageId, levelNumber = null) {
+            // إيقاف الفيديو إذا كانت الصفحة الحالية هي صفحة المقدمة
+            const currentActivePage = document.querySelector('.page.active');
+            if (currentActivePage && currentActivePage.id === 'intro-page') {
+                stopVideo();
+            }
+            
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -1863,6 +1870,18 @@ public class ControlFlowExample {
         // Close popup
         function closePopup() {
             document.getElementById('desktop-popup').style.display = 'none';
+        }
+        
+        // إيقاف تشغيل الفيديو عند مغادرة الصفحة
+        function stopVideo() {
+            const videoIframe = document.getElementById('intro-video');
+            if (videoIframe) {
+                // حفظ مصدر الفيديو الحالي في سمة data-src (لإمكانية إعادة التشغيل لاحقًا)
+                if (!videoIframe.dataset.src) {
+                    videoIframe.dataset.src = videoIframe.src;
+                }
+                videoIframe.src = ''; // إيقاف الفيديو
+            }
         }
         
         // Back to top button
