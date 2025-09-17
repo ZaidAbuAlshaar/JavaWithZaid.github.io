@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zaid.java - تعلم جافا مع زيد</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,43 +14,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-primary-dark">
-    <!-- Desktop Recommendation Popup -->
-    <div id="desktop-popup">
-        <div class="popup-content">
-            <button class="popup-close" onclick="closePopup()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="popup-icon">
-                <i class="fas fa-laptop"></i>
-            </div>
-            <h3 class="popup-title">نصيحة من زيد أبو الشعر</h3>
-            <p class="popup-message">
-                للحصول على أفضل تجربة تعليمية، ننصحك باستخدام الموقع من جهاز الحاسوب. 
-                ستحصل على واجهة أفضل وتجربة تعليمية أكثر تفاعلية ووضوحاً.
-            </p>
-            <button class="btn-primary" onclick="closePopup()">
-                فهمت، شكراً
-            </button>
-        </div>
+    <div class="language-switcher">
+        <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">
+            <span class="lang-text">EN</span>
+            <i class="fas fa-globe"></i>
+        </button>
     </div>
     
-    <!-- Background Pattern -->
     <div class="bg-pattern"></div>
     
-    <!-- Navigation -->
     <header class="fixed top-0 left-0 w-full z-50">
         <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <div class="text-2xl font-bold text-accent-color cursor-pointer" onclick="changePage('home')">
-                    Zaid.<span class="java-logo">java</span>
+                <div class="text-2xl font-bold text-accent-color cursor-pointer" onclick="navigateTo('home')">
+                    Zaid.<span class="java-logo" data-translate="javaWord">java</span>
                 </div>
             </div>
             
-            <div class="hidden md:flex items-center space-x-2">
-                <a href="#" onclick="changePage('home')" class="nav-link">الرئيسية</a>
-                <a href="#" onclick="changePage('about')" class="nav-link">عني</a>
-                <a href="#" onclick="changePage('levels')" class="nav-link">المستويات</a>
-                <a href="#" onclick="changePage('faq')" class="nav-link">الأسئلة الشائعة</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" onclick="navigateTo('home')" class="nav-link" data-translate="home">الرئيسية</a>
+                <a href="#about" onclick="navigateTo('about')" class="nav-link" data-translate="about">عني</a>
+                <a href="#levels" onclick="navigateTo('levels')" class="nav-link" data-translate="levels">المستويات</a>
+                <a href="#faq" onclick="navigateTo('faq')" class="nav-link" data-translate="faq">الأسئلة الشائعة</a>
+                <a href="#contact" onclick="navigateTo('contact')" class="nav-link" data-translate="contact">اتصل بنا</a>
             </div>
             
             <div class="flex items-center">
@@ -60,52 +47,50 @@
         </nav>
     </header>
     
-    <!-- Mobile Menu -->
     <div class="mobile-menu fixed top-0 right-0 w-80 h-full z-50">
         <div class="p-6">
             <div class="flex justify-between items-center mb-10">
-                <div class="text-xl font-bold text-accent-color">القائمة</div>
+                <div class="text-xl font-bold text-accent-color" data-translate="menu">القائمة</div>
                 <button class="close-menu text-white text-xl" onclick="toggleMobileMenu()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="flex flex-col space-y-6">
-                <a href="#" onclick="changePage('home'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700">الرئيسية</a>
-                <a href="#" onclick="changePage('about'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700">عني</a>
-                <a href="#" onclick="changePage('levels'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700">المستويات</a>
-                <a href="#" onclick="changePage('faq'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700">الأسئلة الشائعة</a>
+                <a href="#home" onclick="navigateTo('home'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700" data-translate="home">الرئيسية</a>
+                <a href="#about" onclick="navigateTo('about'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700" data-translate="about">عني</a>
+                <a href="#levels" onclick="navigateTo('levels'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700" data-translate="levels">المستويات</a>
+                <a href="#faq" onclick="navigateTo('faq'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700" data-translate="faq">الأسئلة الشائعة</a>
+                <a href="#contact" onclick="navigateTo('contact'); toggleMobileMenu()" class="text-white text-xl py-3 border-b border-gray-700" data-translate="contact">اتصل بنا</a>
             </div>
         </div>
     </div>
     
-    <!-- Main Content Area -->
     <div class="pt-20 pb-12">
-        <!-- Home Page -->
         <div id="home-page" class="page active">
             <section class="hero">
                 <div class="container mx-auto px-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div class="text-center lg:text-right">
-                            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                                أتقن <span class="java-logo">جافا</span> مع زيد
+                            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">
+                                <span data-translate="heroTitle1">أتقن</span> <span class="java-logo" data-translate="javaWord">جافا</span> <span data-translate="heroTitle2">مع زيد</span>
                             </h1>
-                            <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
+                            <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto fade-in" data-translate="heroDescription">
                                 تعلم لغة جافا من الأساسيات إلى المفاهيم المتقدمة مع دروس تفاعلية واختبارات مصممة خصيصًا لك
                             </p>
-                            <div class="flex flex-col sm:flex-row justify-center lg:justify-end gap-4">
-                                <button class="btn-primary transition-all hover-grow" onclick="changePage('levels')">
-                                    ابدأ الآن <i class="fas fa-arrow-left ml-2"></i>
+                            <div class="flex flex-col sm:flex-row justify-center lg:justify-end gap-4 fade-in">
+                                <button class="btn-primary transition-all hover-grow" onclick="navigateTo('levels')">
+                                    <span data-translate="startNow">ابدأ الآن</span> 
                                 </button>
-                                <button class="btn-outline transition-all hover-grow" onclick="changePage('intro')">
-                                    <i class="fas fa-play mr-2"></i> شاهد المقدمة
+                                <button class="btn-outline transition-all hover-grow" onclick="navigateTo('intro')">
+                                    <i class="fas fa-play mr-2"></i> <span data-translate="watchIntro">شاهد المقدمة</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="flex justify-center">
-                            <div class="relative">
-                                <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent-color rounded-full opacity-20 blur-2xl"></div>
-                                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent-color rounded-full opacity-20 blur-2xl"></div>
-                                <div class="bg-primary-medium rounded-2xl p-8 border border-accent-color/20 relative overflow-hidden">
+                        <div class="flex justify-center fade-in">
+                            <div class="relative w-full">
+                                <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent-color rounded-full opacity-20 blur-2xl hidden md:block"></div>
+                                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent-color rounded-full opacity-20 blur-2xl hidden md:block"></div>
+                                <div class="bg-primary-medium rounded-2xl p-4 md:p-8 border border-accent-color/20 relative overflow-hidden">
                                     <div class="code-block">
                                         <pre><span class="java-keyword">public class</span> <span class="text-accent-color">HelloWorld</span> {
     <span class="java-keyword">public static void</span> main(String[] args) {
@@ -128,40 +113,39 @@
                 </div>
             </section>
             
-            <!-- Features Section -->
             <section class="py-20 relative">
                 <div class="container mx-auto px-4">
-                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="whyChoose">
                         لماذا تختار Zaid.java؟
                     </h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="card p-8 transition-all hover-grow">
+                        <div class="card p-8 transition-all hover-grow fade-in">
                             <div class="feature-icon">
                                 <i class="fas fa-laptop-code"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">تعلم تفاعلي</h3>
-                            <p class="text-text-secondary">
+                            <h3 class="text-xl font-bold text-white mb-4" data-translate="interactiveLearning">تعلم تفاعلي</h3>
+                            <p class="text-text-secondary" data-translate="interactiveLearningDesc">
                                 تعلم جافا من خلال أمثلة عملية وتمارين تفاعلية مصممة للمبتدئين والمتقدمين على حد سواء.
                             </p>
                         </div>
                         
-                        <div class="card p-8 transition-all hover-grow">
+                        <div class="card p-8 transition-all hover-grow fade-in">
                             <div class="feature-icon">
                                 <i class="fas fa-book-open"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">منهج منظم</h3>
-                            <p class="text-text-secondary">
+                            <h3 class="text-xl font-bold text-white mb-4" data-translate="structuredCurriculum">منهج منظم</h3>
+                            <p class="text-text-secondary" data-translate="structuredCurriculumDesc">
                                 تقدم عبر مستويات مصممة بعناية، من أنواع البيانات الأساسية إلى مفاهيم البرمجة الشيئية المتقدمة.
                             </p>
                         </div>
                         
-                        <div class="card p-8 transition-all hover-grow">
+                        <div class="card p-8 transition-all hover-grow fade-in">
                             <div class="feature-icon">
                                 <i class="fas fa-chart-line"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">تتبع التقدم</h3>
-                            <p class="text-text-secondary">
+                            <h3 class="text-xl font-bold text-white mb-4" data-translate="progressTracking">تتبع التقدم</h3>
+                            <p class="text-text-secondary" data-translate="progressTrackingDesc">
                                 أكمل الاختبارات واحصل على ملاحظات شخصية أثناء إتقانك لكل مفهوم برمجي في رحلتك التعليمية.
                             </p>
                         </div>
@@ -169,118 +153,196 @@
                 </div>
             </section>
             
-            <!-- Levels Preview Section -->
             <section class="py-20 bg-primary-medium">
                 <div class="container mx-auto px-4">
-                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16">
-                        مستويات تعلم جافا
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="stats">
+                        إحصائيات الموقع
                     </h2>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="level-card">
-                            <div class="level-card-inner">
-                                <div class="level-card-front flex flex-col items-center justify-center p-6">
-                                    <div class="text-4xl text-accent-color mb-4">
-                                        <i class="fas fa-database"></i>
-                                    </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 1</h3>
-                                    <p class="text-text-secondary text-center">أنواع البيانات والإدخال</p>
-                                </div>
-                                <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">أنواع البيانات والإدخال</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
-                                        تعلم الأنواع الأساسية وكيفية استقبال مدخلات من المستخدم
-                                    </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 1)">
-                                        ابدأ التعلم
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div class="text-center fade-in">
+                            <div class="text-4xl md:text-5xl font-bold text-accent-color mb-2">10</div>
+                            <div class="text-text-secondary" data-translate="educationalLevels">مستوى تعليمي</div>
                         </div>
-                        
-                        <div class="level-card">
-                            <div class="level-card-inner">
-                                <div class="level-card-front flex flex-col items-center justify-center p-6">
-                                    <div class="text-4xl text-accent-color mb-4">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 2</h3>
-                                    <p class="text-text-secondary text-center">المتغيرات والتعبيرات</p>
-                                </div>
-                                <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">المتغيرات والتعبيرات</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
-                                        فهم كيفية تخزين البيانات في متغيرات واستخدام التعبيرات
-                                    </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 2)">
-                                        ابدأ التعلم
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="text-center fade-in">
+                            <div class="text-4xl md:text-5xl font-bold text-accent-color mb-2">+20</div>
+                            <div class="text-text-secondary" data-translate="interactiveExercises">تمرين تفاعلي</div>
                         </div>
-                        
-                        <div class="level-card">
-                            <div class="level-card-inner">
-                                <div class="level-card-front flex flex-col items-center justify-center p-6">
-                                    <div class="text-4xl text-accent-color mb-4">
-                                        <i class="fas fa-calculator"></i>
-                                    </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 3</h3>
-                                    <p class="text-text-secondary text-center">المعاملات</p>
-                                </div>
-                                <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">المعاملات</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
-                                        تعرف على المعاملات الحسابية، المنطقية، والمقارنة
-                                    </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 3)">
-                                        ابدأ التعلم
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="text-center fade-in">
+                            <div class="text-4xl md:text-5xl font-bold text-accent-color mb-2">+10</div>
+                            <div class="text-text-secondary" data-translate="learningHours">ساعة تعليمية</div>
+                        </div>
+                        <div class="text-center fade-in">
+                            <div class="text-4xl md:text-5xl font-bold text-accent-color mb-2">24/7</div>
+                            <div class="text-text-secondary" data-translate="supportAvailable">دعم متاح</div>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <!-- CTA Section -->
+            <section class="py-20">
+                <div class="container mx-auto px-4">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="javaLevels">
+                        مستويات تعلم جافا
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber1">المستوى 1</h3>
+                                    <p class="text-text-secondary text-center" data-translate="dataTypes">أنواع البيانات والإدخال</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="dataTypes">أنواع البيانات والإدخال</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="dataTypesDesc">
+                                        تعلم الأنواع الأساسية وكيفية استقبال مدخلات من المستخدم
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 1)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber2">المستوى 2</h3>
+                                    <p class="text-text-secondary text-center" data-translate="variables">المتغيرات والتعبيرات</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="variables">المتغيرات والتعبيرات</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="variablesDesc">
+                                        فهم كيفية تخزين البيانات في متغيرات واستخدام التعبيرات
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 2)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber3">المستوى 3</h3>
+                                    <p class="text-text-secondary text-center" data-translate="operators">المعاملات</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="operators">المعاملات</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="operatorsDesc">
+                                        تعرف على المعاملات الحسابية، المنطقية، والمقارنة
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 3)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12 fade-in">
+                        <button class="btn-primary px-8 py-3" onclick="navigateTo('levels')">
+                            <span data-translate="viewAllLevels">عرض جميع المستويات</span> <i class="fas fa-arrow-left ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="py-20 bg-primary-medium">
+                <div class="container mx-auto px-4">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="testimonials">
+                        آراء المتعلمين
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card p-6 fade-in">
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center mb-4 text-center sm:text-right">
+                                <div class="w-12 h-12 bg-accent-color rounded-full flex items-center justify-center text-primary-dark font-bold mb-2 sm:mb-0">م</div>
+                                <div class="mr-3">
+                                    <div class="font-bold text-white" data-translate="studentName1">محمد</div>
+                                    <div class="text-text-secondary text-sm" data-translate="webDeveloper">مطور ويب</div>
+                                </div>
+                            </div>
+                            <p class="text-text-secondary" data-translate="testimonial1">
+                                "منصة رائعة لتعلم جافا، ساعدتني في فهم المفاهيم الصعبة بسهولة من خلال الأمثلة التفاعلية."
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6 fade-in">
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center mb-4 text-center sm:text-right">
+                                <div class="w-12 h-12 bg-accent-color rounded-full flex items-center justify-center text-primary-dark font-bold mb-2 sm:mb-0">س</div>
+                                <div class="mr-3">
+                                    <div class="font-bold text-white" data-translate="studentName2">سارة</div>
+                                    <div class="text-text-secondary text-sm" data-translate="csStudent">طالبة علوم حاسوب</div>
+                                </div>
+                            </div>
+                            <p class="text-text-secondary" data-translate="testimonial2">
+                                "المستويات منظمة بشكل ممتاز، والتمارين ساعدتني في اجتياز امتحان البرمجة بنجاح."
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6 fade-in">
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center mb-4 text-center sm:text-right">
+                                <div class="w-12 h-12 bg-accent-color rounded-full flex items-center justify-center text-primary-dark font-bold mb-2 sm:mb-0">ع</div>
+                                <div class="mr-3">
+                                    <div class="font-bold text-white" data-translate="studentName3">علي</div>
+                                    <div class="text-text-secondary text-sm" data-translate="beginner">مبتدئ في البرمجة</div>
+                                </div>
+                            </div>
+                            <p class="text-text-secondary" data-translate="testimonial3">
+                                "كمبتدئ، وجدت الدروس سهلة الفهم والتقدم التدريجي ساعدني في بناء أساس قوي في جافا."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <section class="py-20">
                 <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 fade-in" data-translate="readyToStart">
                         هل أنت مستعد لبدء رحلتك في جافا؟
                     </h2>
-                    <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
-                        انضم إلى الآلاف من المتعلمين الذين أتقنوا برمجة جافا من خلال منصتنا التفاعلية
+                    <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto fade-in" data-translate="ctaDescription">
+                        انضم إلى الكثير من المتعلمين الذين أتقنوا برمجة جافا من خلال منصتنا التفاعلية
                     </p>
-                    <button class="btn-primary transition-all hover-grow px-10 py-4 text-lg" onclick="changePage('levels')">
-                        ابدأ التعلم الآن <i class="fas fa-arrow-left ml-2"></i>
+                    <button class="btn-primary transition-all hover-grow px-10 py-4 text-lg fade-in" onclick="navigateTo('levels')">
+                        <span data-translate="startLearningNow">ابدأ التعلم الآن</span> <i class="fas fa-arrow-left ml-2"></i>
                     </button>
                 </div>
             </section>
         </div>
         
-        <!-- About Page -->
         <div id="about-page" class="page">
             <section class="py-20">
                 <div class="container mx-auto px-4">
-                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="aboutZaid">
                         عن زيد أبو الشعر
                     </h2>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div class="flex justify-center">
+                        <div class="flex justify-center fade-in">
                             <div class="profile-img-container">
-                                <!-- تم استبدال الأيقونة بالصورة المطلوبة -->
-                                <img src="6U8A0156_1_11zon.jpg" alt="Zaid Abu Al Shaar" class="profile-img">
+                                <img src="Gemini_Generated_Image_24cw2824cw2824cw.png" alt="Zaid Abu Al Shaar" class="profile-img">
                             </div>
                         </div>
                         
-                        <div>
-                            <h3 class="text-2xl font-bold text-accent-color mb-4">زيد أبو الشعر</h3>
-                            <p class="text-text-secondary mb-6 leading-relaxed">
-                                طالب علوم حاسوب متحمس ومطور AR/VR/AI (الأول على دفعته مع مرتبة الشرف). بارع في جافا، C#، جافا سكريبت، HTML، CSS， PHP. ذو خبرة في تطبيقات الرعاية الصحية بتقنية XR، ومشاريع الذكاء الاصطناعي (الاتصالات)، وتصميم/نمذجة الويب.
+                        <div class="fade-in">
+                            <h3 class="text-2xl font-bold text-accent-color mb-4"><span data-translate="zaidName">زيد أبو الشعر</span></h3>
+                            <p class="text-text-secondary mb-6 leading-relaxed" data-translate="aboutDescription1">
+                                طالب علوم حاسوب متحمس ومطور AR/VR/AI (الأول على دفعته مع مرتبة الشرف). بارع في جافا، C#، جافا سكريبت، HTML، CSS، PHP. ذو خبرة في تطبيقات الرعاية الصحية بتقنية XR، ومشاريع الذكاء الاصطناعي (الاتصالات)، وتصميم/نمذجة الويب.
                             </p>
-                            <p class="text-text-secondary mb-8 leading-relaxed">
+                            <p class="text-text-secondary mb-8 leading-relaxed" data-translate="aboutDescription2">
                                 مطور عضوية MD في فرع طلاب IEEE بجامعة البتراء، حيث أساهم في دعم نمو الفرع من خلال الفعاليات ومشاركة الأعضاء. عضو مؤسس لنادي الواقع الافتراضي والألعاب بجامعة البتراء.
                             </p>
                             
@@ -295,44 +357,43 @@
                         </div>
                     </div>
                     
-                    <!-- Skills Section -->
                     <div class="mt-20">
-                        <h3 class="text-2xl font-bold text-white mb-8 text-center">مهارات وخبرات</h3>
+                        <h3 class="text-2xl font-bold text-white mb-8 text-center fade-in" data-translate="skills">مهارات وخبرات</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="card p-6">
-                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-code mr-2"></i> البرمجة</h4>
+                            <div class="card p-6 fade-in">
+                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-code mr-2"></i> <span data-translate="programming">البرمجة</span></h4>
                                 <ul class="text-text-secondary space-y-2">
-                                    <li>Java - مستوى متقدم</li>
-                                    <li>C# - مستوى متقدم</li>
-                                    <li>JavaScript - مستوى متقدم</li>
-                                    <li>Python - مستوى متقدم</li>
+                                    <li><span data-translate="javaWord">Java</span> - <span data-translate="advancedLevel">مستوى متقدم</span></li>
+                                    <li><span data-translate="cSharpWord">C#</span> - <span data-translate="advancedLevel">مستوى متقدم</span></li>
+                                    <li><span data-translate="javaScriptWord">JavaScript</span> - <span data-translate="advancedLevel">مستوى متقدم</span></li>
+                                    <li><span data-translate="pythonWord">Python</span> - <span data-translate="advancedLevel">مستوى متقدم</span></li>
                                 </ul>
                             </div>
                             
-                            <div class="card p-6">
-                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-graduation-cap mr-2"></i> التعليم</h4>
+                            <div class="card p-6 fade-in">
+                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-graduation-cap mr-2"></i> <span data-translate="education">التعليم</span></h4>
                                 <ul class="text-text-secondary space-y-2">
-                                    <li>بكالوريوس علوم الحاسوب \الواقع الافتراضي والمعزز - جامعة البتراء</li>
-                                    <li>الأول على الدفعة مع مرتبة الشرف</li>
-                                    <li>دورات متقدمة في الذكاء الاصطناعي</li>
+                                    <li data-translate="educationItem1">بكالوريوس علوم الحاسوب \الواقع الافتراضي والمعزز - جامعة البتراء</li>
+                                    <li data-translate="educationItem2">الأول على الدفعة مع مرتبة الشرف</li>
+                                    <li data-translate="educationItem3">دورات متقدمة في الذكاء الاصطناعي</li>
                                 </ul>
                             </div>
                             
-                            <div class="card p-6">
-                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-briefcase mr-2"></i> الخبرات</h4>
+                            <div class="card p-6 fade-in">
+                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-briefcase mr-2"></i> <span data-translate="experience">الخبرات</span></h4>
                                 <ul class="text-text-secondary space-y-2">
-                                    <li>مطور تطبيقات AR/VR</li>
-                                    <li>مطور مشاريع الذكاء الاصطناعي</li>
-                                    <li>مطور عضوية MD - IEEE</li>
+                                    <li data-translate="experienceItem1">مطور تطبيقات AR/VR</li>
+                                    <li data-translate="experienceItem2">مطور مشاريع الذكاء الاصطناعي</li>
+                                    <li data-translate="experienceItem3">مطور عضوية MD - IEEE</li>
                                 </ul>
                             </div>
                             
-                            <div class="card p-6">
-                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-trophy mr-2"></i> الإنجازات</h4>
+                            <div class="card p-6 fade-in">
+                                <h4 class="text-xl font-bold text-accent-color mb-4"><i class="fas fa-trophy mr-2"></i> <span data-translate="achievements">الإنجازات</span></h4>
                                 <ul class="text-text-secondary space-y-2">
-                                    <li>الأول على الدفعة في جامعة البتراء</li>
-                                    <li>مؤسس نادي الواقع الافتراضي والألعاب</li>
-                                    <li>مساهم رئيسي في فعاليات IEEE</li>
+                                    <li data-translate="achievementItem1">الأول على الدفعة في جامعة البتراء</li>
+                                    <li data-translate="achievementItem2">مؤسس نادي الواقع الافتراضي والألعاب</li>
+                                    <li data-translate="achievementItem3">مساهم رئيسي في فعاليات IEEE</li>
                                 </ul>
                             </div>
                         </div>
@@ -341,142 +402,219 @@
             </section>
         </div>
         
-        <!-- Levels Page -->
         <div id="levels-page" class="page">
             <section class="py-20">
                 <div class="container mx-auto px-4">
-                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16">
-                        12 مستوى لتعلم جافا
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="tenLevels">
+                        10 مستوى لتعلم جافا
                     </h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Level 1 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-database"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 1</h3>
-                                    <p class="text-text-secondary text-center">أنواع البيانات والإدخال</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber1">المستوى 1</h3>
+                                    <p class="text-text-secondary text-center" data-translate="dataTypes">أنواع البيانات والإدخال</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">أنواع البيانات والإدخال</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="dataTypes">أنواع البيانات والإدخال</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="dataTypesDesc">
                                         تعلم الأنواع الأساسية وكيفية استقبال مدخلات من المستخدم
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 1)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 1)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Level 2 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-code"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 2</h3>
-                                    <p class="text-text-secondary text-center">المتغيرات والتعبيرات</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber2">المستوى 2</h3>
+                                    <p class="text-text-secondary text-center" data-translate="variables">المتغيرات والتعبيرات</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">المتغيرات والتعبيرات</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="variables">المتغيرات والتعبيرات</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="variablesDesc">
                                         فهم كيفية تخزين البيانات في متغيرات واستخدام التعبيرات
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 2)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 2)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Level 3 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-calculator"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 3</h3>
-                                    <p class="text-text-secondary text-center">المعاملات</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber3">المستوى 3</h3>
+                                    <p class="text-text-secondary text-center" data-translate="operators">المعاملات</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">المعاملات</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="operators">المعاملات</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="operatorsDesc">
                                         تعرف على المعاملات الحسابية، المنطقية، والمقارنة
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 3)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 3)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Level 4 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-project-diagram"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 4</h3>
-                                    <p class="text-text-secondary text-center">التحكم بالتدفق</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber4">المستوى 4</h3>
+                                    <p class="text-text-secondary text-center" data-translate="controlFlow">التحكم بالتدفق</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">التحكم بالتدفق</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="controlFlow">التحكم بالتدفق</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="controlFlowDesc">
                                         تعلم استخدام الجمل الشرطية والتفرعات
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 4)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 4)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Level 5 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-redo"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 5</h3>
-                                    <p class="text-text-secondary text-center">الحلقات التكرارية</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber5">المستوى 5</h3>
+                                    <p class="text-text-secondary text-center" data-translate="loops">الحلقات التكرارية</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">الحلقات التكرارية</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="loops">الحلقات التكرارية</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="loopsDesc">
                                         فهم واستخدام الحلقات التكرارية في جافا
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 5)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 5)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Level 6 -->
-                        <div class="level-card">
+                        <div class="level-card fade-in">
                             <div class="level-card-inner">
                                 <div class="level-card-front flex flex-col items-center justify-center p-6">
                                     <div class="text-4xl text-accent-color mb-4">
                                         <i class="fas fa-layer-group"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-white mb-2">المستوى 6</h3>
-                                    <p class="text-text-secondary text-center">المصفوفات</p>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber6">المستوى 6</h3>
+                                    <p class="text-text-secondary text-center" data-translate="arrays">المصفوفات</p>
                                 </div>
                                 <div class="level-card-back flex flex-col items-center justify-center p-6">
-                                    <h4 class="text-xl font-bold text-white mb-4">المصفوفات</h4>
-                                    <p class="text-text-secondary mb-4 text-center">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="arrays">المصفوفات</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="arraysDesc">
                                         تعلم كيفية التعامل مع المصفوفات في جافا
                                     </p>
-                                    <button class="btn-outline transition-all hover-grow" onclick="changePage('level-detail', 6)">
-                                        ابدأ التعلم
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 6)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber7">المستوى 7</h3>
+                                    <p class="text-text-secondary text-center" data-translate="methods">الوظائف (Methods)</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="methods">الوظائف (Methods)</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="methodsDesc">
+                                        تعلم كيفية إنشاء واستدعاء الوظائف في جافا
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 7)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-object-group"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber8">المستوى 8</h3>
+                                    <p class="text-text-secondary text-center" data-translate="oop">البرمجة كائنية التوجه (OOP)</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="oop">البرمجة كائنية التوجه (OOP)</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="oopDesc">
+                                        فهم أساسيات البرمجة كائنية التوجه في جافا
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 8)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-copy"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber9">المستوى 9</h3>
+                                    <p class="text-text-secondary text-center" data-translate="codePractice">تدريب على كتابة الأكواد</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="codePractice">تدريب على كتابة الأكواد</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="codePracticeDesc">
+                                        تدرب على كتابة أكواد جافا بسيطة وتصحيح الأخطاء
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 9)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-card fade-in">
+                            <div class="level-card-inner">
+                                <div class="level-card-front flex flex-col items-center justify-center p-6">
+                                    <div class="text-4xl text-accent-color mb-4">
+                                        <i class="fas fa-code-branch"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-2" data-translate="levelNumber10">المستوى 10</h3>
+                                    <p class="text-text-secondary text-center" data-translate="project">مشروع متكامل</p>
+                                </div>
+                                <div class="level-card-back flex flex-col items-center justify-center p-6">
+                                    <h4 class="text-xl font-bold text-white mb-4" data-translate="project">مشروع متكامل</h4>
+                                    <p class="text-text-secondary mb-4 text-center" data-translate="projectDesc">
+                                        تطبيق كل ما تعلمته في مشروع متكامل
+                                    </p>
+                                    <button class="btn-outline transition-all hover-grow" onclick="navigateTo('level-detail', 10)">
+                                        <span data-translate="startLearning">ابدأ التعلم</span>
                                     </button>
                                 </div>
                             </div>
@@ -486,29 +624,28 @@
             </section>
         </div>
         
-        <!-- FAQ Page -->
         <div id="faq-page" class="page">
             <section class="py-20">
                 <div class="container mx-auto px-4">
-                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="faqTitle">
                         الأسئلة الشائعة
                     </h2>
                     
                     <div class="max-w-4xl mx-auto">
-                        <div class="card mb-6 overflow-hidden">
+                        <div class="card mb-6 overflow-hidden fade-in">
                             <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(1)">
-                                <h3 class="text-xl font-bold text-white">ما هي أنواع البيانات الأساسية في جافا؟</h3>
+                                <h3 class="text-xl font-bold text-white" data-translate="faq1Question">ما هي أنواع البيانات الأساسية في جافا؟</h3>
                                 <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-1"></i>
                             </div>
                             <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-1">
-                                <p class="mb-4">
+                                <p class="mb-4" data-translate="faq1Answer1">
                                     أنواع البيانات الأساسية في جافا تشمل:
                                 </p>
                                 <ul class="list-disc list-inside mb-4">
-                                    <li>الأعداد الصحيحة (int): مثل 5, 10, -3</li>
-                                    <li>الأعداد العشرية (double): مثل 3.14, 2.5, -0.5</li>
-                                    <li>السلاسل النصية(الكلمات) (String): مثل "مرحباً", "جافا"</li>
-                                    <li>القيم المنطقية (boolean): true أو false</li>
+                                    <li data-translate="faq1ListItem1">الأعداد الصحيحة (int): مثل 5, 10, -3</li>
+                                    <li data-translate="faq1ListItem2">الأعداد العشرية (double): مثل 3.14, 2.5, -0.5</li>
+                                    <li data-translate="faq1ListItem3">السلاسل النصية(الكلمات) (String): مثل "مرحباً", "جافا"</li>
+                                    <li data-translate="faq1ListItem4">القيم المنطقية (boolean): true أو false</li>
                                 </ul>
                                 <div class="code-block">
                                     <pre><span class="java-keyword">int</span> age = <span class="java-number">25</span>;
@@ -519,13 +656,13 @@ String name = <span class="java-string">"زيد"</span>;
                             </div>
                         </div>
                         
-                        <div class="card mb-6 overflow-hidden">
+                        <div class="card mb-6 overflow-hidden fade-in">
                             <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(2)">
-                                <h3 class="text-xl font-bold text-white">كيف يمكنني أخذ مدخلات من المستخدم؟</h3>
+                                <h3 class="text-xl font-bold text-white" data-translate="faq2Question">كيف يمكنني أخذ مدخلات من المستخدم؟</h3>
                                 <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-2"></i>
                             </div>
                             <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-2">
-                                <p class="mb-4">
+                                <p class="mb-4" data-translate="faq2Answer1">
                                     يمكنك استخدام الكلاس Scanner لأخذ مدخلات من المستخدم:
                                 </p>
                                 <div class="code-block">
@@ -548,18 +685,18 @@ String name = <span class="java-string">"زيد"</span>;
                             </div>
                         </div>
                         
-                        <div class="card mb-6 overflow-hidden">
+                        <div class="card mb-6 overflow-hidden fade-in">
                             <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(3)">
-                                <h3 class="text-xl font-bold text-white">ما الفرق بين المصفوفات (Arrays) والقوائم (Lists)؟</h3>
+                                <h3 class="text-xl font-bold text-white" data-translate="faq3Question">ما الفرق بين المصفوفات (Arrays) والقوائم (Lists)؟</h3>
                                 <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-3"></i>
                             </div>
                             <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-3">
-                                <p class="mb-4">
+                                <p class="mb-4" data-translate="faq3Answer1">
                                     الاختلافات الرئيسية:
                                 </p>
                                 <ul class="list-disc list-inside mb-4">
-                                    <li>المصفوفات (Arrays): حجم ثابت ولا يمكن تغيير حجمها بعد التهيئة</li>
-                                    <li>القوائم (Lists): حجم ديناميكي ويمكن إضافة/حذف العناصر بسهولة</li>
+                                    <li data-translate="faq3ListItem1">المصفوفات (Arrays): حجم ثابت ولا يمكن تغيير حجمها بعد التهيئة</li>
+                                    <li data-translate="faq3ListItem2">القوائم (Lists): حجم ديناميكي ويمكن إضافة/حذف العناصر بسهولة</li>
                                 </ul>
                                 <div class="code-block">
                                     <pre><span class="java-comment">// مصفوفة</span>
@@ -576,110 +713,81 @@ myList.add(<span class="java-string">"برتقال"</span>);</pre>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Level Detail Page -->
-        <div id="level-detail-page" class="page">
-            <section class="py-20">
-                <div class="container mx-auto px-4">
-                    <div class="flex items-center mb-8">
-                        <button class="btn-outline mr-4" onclick="changePage('levels')">
-                            <i class="fas fa-arrow-right ml-2"></i> العودة للمستويات
-                        </button>
-                        <h2 class="text-3xl font-bold text-white" id="level-title">المستوى 1: أنواع البيانات والإدخال</h2>
-                    </div>
-                    
-                    <div class="level-detail">
-                        <h3 class="text-xl font-bold text-accent-color mb-4">شرح المستوى</h3>
-                        <p class="text-text-secondary mb-6" id="level-description">
-                            في هذا المستوى، ستتعلم أساسيات التعامل مع البيانات في جافا. سنتعرف على الأنواع الرئيسية مثل الأعداد الصحيحة (int)، الأعداد العشرية (double)، السلاسل النصية (String)، والقيم المنطقية (boolean). الأهم من ذلك، ستتعلم كيفية جعل برنامجك يتفاعل مع المستخدم عبر استقبال المدخلات باستخدام `Scanner`.
-                        </p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                            <div>
-                                <h4 class="text-lg font-bold text-white mb-4">المفاهيم الرئيسية</h4>
-                                <ul class="text-text-secondary space-y-2" id="level-concepts">
-                                    <li>أنواع البيانات الأساسية في جافا</li>
-                                    <li>الفرق между int و double</li>
-                                    <li>كيفية التعامل مع النصوص (String)</li>
-                                    <li>القيم المنطقية (true/false)</li>
-                                    <li>استخدام Scanner لقراءة المدخلات</li>
+                        <div class="card mb-6 overflow-hidden fade-in">
+                            <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(4)">
+                                <h3 class="text-xl font-bold text-white" data-translate="faq4Question">ما هي أهم مبادئ البرمجة كائنية التوجه (OOP) في جافا؟</h3>
+                                <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-4"></i>
+                            </div>
+                            <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-4">
+                                <p class="mb-4" data-translate="faq4Answer1">
+                                    أهم مبادئ البرمجة كائنية التوجه في جافا هي:
+                                </p>
+                                <ul class="list-disc list-inside mb-4">
+                                    <li data-translate="faq4ListItem1">التغليف (Encapsulation): إخفاء تفاصيل التنفيذ الداخلية</li>
+                                    <li data-translate="faq4ListItem2">الوراثة (Inheritance): إعادة استخدام الكود من خلال إنشاء علاقات بين الفئات</li>
+                                    <li data-translate="faq4ListItem3">تعدد الأشكال (Polymorphism): إمكانية تنفيذ نفس العملية بطرق مختلفة</li>
+                                    <li data-translate="faq4ListItem4">التجريد (Abstraction): إخفاء التفاصيل المعقدة وإظهار الوظائف الأساسية فقط</li>
                                 </ul>
                             </div>
-                            
-                            <div>
-                                <h4 class="text-lg font-bold text-white mb-4">أمثلة التعليمات البرمجية</h4>
+                        </div>
+                        
+                        <div class="card mb-6 overflow-hidden fade-in">
+                            <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(5)">
+                                <h3 class="text-xl font-bold text-white" data-translate="faq5Question">كيف يمكنني التعامل مع الملفات في جافا؟</h3>
+                                <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-5"></i>
+                            </div>
+                            <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-5">
+                                <p class="mb-4" data-translate="faq5Answer1">
+                                    يمكن استخدام FileReader و FileWriter أو المكتبات الحديثة مثل java.nio.file:
+                                </p>
                                 <div class="code-block">
-                                    <pre id="level-code">import java.util.Scanner;
-
-public class DataTypesExample {
-    public static void main(String[] args) {
-        // تعريف متغيرات بأنواع مختلفة
-        int age = 25;
-        double height = 1.75;
-        String name = "زيد";
-        boolean isStudent = true;
-        
-        // طباعة القيم
-        System.out.println("الاسم: " + name);
-        System.out.println("العمر: " + age);
-        System.out.println("الطول: " + height);
-        System.out.println("هل هو طالب؟ " + isStudent);
-        
-        // قراءة المدخلات من المستخدم
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("أدخل اسمك: ");
-        String userName = scanner.nextLine();
-        System.out.println("مرحبًا " + userName + "!");
+                                    <pre><span class="java-comment">// قراءة ملف باستخدام Files</span>
+try {
+    List&lt;String&gt; lines = Files.readAllLines(Paths.get(<span class="java-string">"ملف.txt"</span>));
+    for (String line : lines) {
+        System.out.println(line);
     }
+} catch (IOException e) {
+    System.out.println(<span class="java-string">"خطأ في قراءة الملف: "</span> + e.getMessage());
+}
+
+<span class="java-comment">// كتابة ملف</span>
+try {
+    Files.write(Paths.get(<span class="java-string">"ملف.txt"</span>), 
+               Arrays.asList(<span class="java-string">"سطر 1"</span>, <span class="java-string">"سطر 2"</span>), 
+               StandardOpenOption.CREATE);
+} catch (IOException e) {
+    System.out.println(<span class="java-string">"خطأ في كتابة الملف: "</span> + e.getMessage());
 }</pre>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Additional Resources Section -->
-                        <div class="mt-8">
-                            <h4 class="text-lg font-bold text-white mb-4">الموارد الإضافية</h4>
-                            <div id="additional-resources" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <!-- Resources will be added by JavaScript -->
+                        <div class="card mb-6 overflow-hidden fade-in">
+                            <div class="faq-header p-6 cursor-pointer flex justify-between items-center" onclick="toggleFAQ(6)">
+                                <h3 class="text-xl font-bold text-white" data-translate="faq6Question">ما هي الاستثناءات (Exceptions) وكيف نتعامل معها في جافا؟</h3>
+                                <i class="fas fa-chevron-down text-accent-color text-lg transform transition-transform" id="faq-icon-6"></i>
                             </div>
-                        </div>
-                        
-                        <div class="quiz-container mt-12">
-                            <h3 class="text-xl font-bold text-accent-color mb-6">اختبر معلوماتك</h3>
-                            <p class="text-text-secondary mb-4" id="quiz-question">ما هي الكلاس المستخدم لأخذ مدخلات من المستخدم في جافا؟</p>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="quiz-option" onclick="selectAnswer(this, 'Scanner')">
-                                    <div class="flex items-center justify-center">
-                                        <span>Scanner</span>
-                                    </div>
+                            <div class="faq-content px-6 pb-6 text-text-secondary hidden" id="faq-content-6">
+                                <p class="mb-4" data-translate="faq6Answer1">
+                                    الاستثناءات هي أحداث غير متوقعة تحدث أثناء تنفيذ البرنامج. يمكن التعامل معها باستخدام:
+                                </p>
+                                <ul class="list-disc list-inside mb-4">
+                                    <li data-translate="faq6ListItem1">try-catch: للتعامل مع الاستثناءات عند حدوثها</li>
+                                    <li data-translate="faq6ListItem2">throws: لنقل مسؤولية التعامل مع الاستثناء للدالة المستدعية</li>
+                                    <li data-translate="faq6ListItem3">finally: لتنفيذ كود بغض النظر عن حدوث استثناء أم لا</li>
+                                </ul>
+                                <div class="code-block">
+                                    <pre><span class="java-keyword">try</span> {
+    <span class="java-comment">// كود قد يسبب استثناء</span>
+    <span class="java-keyword">int</span> result = 10 / 0;
+} <span class="java-keyword">catch</span> (ArithmeticException e) {
+    System.out.println(<span class="java-string">"خطأ في القسمة: "</span> + e.getMessage());
+} <span class="java-keyword">finally</span> {
+    System.out.println(<span class="java-string">"هذا الكود سينفذ دائماً"</span>);
+}</pre>
                                 </div>
-                                <div class="quiz-option" onclick="selectAnswer(this, 'Input')">
-                                    <div class="flex items-center justify-center">
-                                        <span>Input</span>
-                                    </div>
-                                </div>
-                                <div class="quiz-option" onclick="selectAnswer(this, 'Reader')">
-                                    <div class="flex items-center justify-center">
-                                        <span>Reader</span>
-                                    </div>
-                                </div>
-                                <div class="quiz-option" onclick="selectAnswer(this, 'System.in')">
-                                    <div class="flex items-center justify-center">
-                                        <span>System.in</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div id="quiz-result" class="mt-6 text-center hidden">
-                                <p class="text-xl font-bold" id="result-text">إجابة صحيحة! أحسنت!</p>
-                                <button class="btn-outline mt-4" onclick="changePage('levels')">
-                                    المستوى التالي <i class="fas fa-arrow-left ml-2"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -687,41 +795,223 @@ public class DataTypesExample {
             </section>
         </div>
         
-        <!-- Intro Video Page -->
+        <div id="contact-page" class="page">
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-white text-center mb-16 fade-in" data-translate="contactTitle">
+                اتصل بنا
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold text-accent-color mb-6" data-translate="stayInTouch">ابقى على تواصل</h3>
+                    <p class="text-text-secondary mb-8" data-translate="contactDescription">
+                        لديك استفسار أو تحتاج إلى مساعدة؟ لا تتردد في التواصل معنا. نحن هنا لمساعدتك في رحلتك التعليمية.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-accent-color/20 rounded-full flex items-center justify-center text-accent-color mr-4">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white" data-translate="phoneWhatsapp">الهاتف / واتساب</div>
+                                <div class="text-text-secondary">+962 79 956 9573</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-accent-color/20 rounded-full flex items-center justify-center text-accent-color mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white" data-translate="address">العنوان</div>
+                                <div class="text-text-secondary" data-translate="location">عمان، الأردن</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold text-white mb-4" data-translate="followUs">تابعنا على</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com/Zaid_10_7" target="_blank" class="w-10 h-10 bg-accent-color/20 rounded-full flex items-center justify-center text-accent-color hover:bg-accent-color hover:text-primary-dark transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://wa.me/962799569573" target="_blank" class="w-10 h-10 bg-accent-color/20 rounded-full flex items-center justify-center text-accent-color hover:bg-accent-color hover:text-primary-dark transition-colors">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 fade-in">
+                    <h3 class="text-2xl font-bold text-accent-color mb-6" data-translate="sendMessage">أرسل رسالة</h3>
+                    <form class="space-y-6" id="contact-form">
+                        <div>
+                            <label for="name" class="block text-white mb-2" data-translate="name">الاسم</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-black focus:outline-none focus:border-accent-color transition-colors" required data-translate="namePlaceholder" placeholder="اسمك">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-white mb-2" data-translate="message">الرسالة</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-black focus:outline-none focus:border-accent-color transition-colors" required data-translate="messagePlaceholder" placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full">
+                            <span data-translate="sendViaWhatsapp">إرسال عبر واتساب</span> <i class="fab fa-whatsapp ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+            <!-- باقي المحتوى يبقى كما هو حتى قسم level-detail-page -->
+    
+     
+    <div id="level-detail-page" class="page">
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center mb-8 fade-in">
+                    <button class="btn-outline mr-4" onclick="navigateTo('levels')">
+                        <i class="fas fa-arrow-right ml-2"></i> <span data-translate="backToLevels">العودة للمستويات</span>
+                    </button>
+                    <h2 class="text-3xl font-bold text-white" id="level-title"></h2>
+                </div>
+                
+                <div class="level-detail">
+                    <h3 class="text-xl font-bold text-accent-color mb-4 fade-in" data-translate="levelDescription">شرح المستوى</h3>
+                    <p class="text-text-secondary mb-6 fade-in whitespace-pre-wrap" id="level-description"></p>
+                    
+                    <!-- MODIFIED: Added detailed theory section -->
+                    <div class="mb-8 fade-in">
+                        <h4 class="text-lg font-bold text-accent-color mb-4">📚 الشرح النظري</h4>
+                        <div class="text-text-secondary bg-primary-light p-6 rounded-lg" id="level-theory"></div>
+                    </div>
+                    
+                    <!-- MODIFIED: Added common errors section -->
+                    <div class="mb-8 fade-in">
+                        <h4 class="text-lg font-bold text-error mb-4">⚠️ الأخطاء الشائعة</h4>
+                        <ul class="text-text-secondary space-y-2 bg-primary-light p-6 rounded-lg" id="level-common-errors"></ul>
+                    </div>
+
+                    <!-- MODIFIED: Added practical examples section -->
+                    <div class="mb-8 fade-in">
+                        <h4 class="text-lg font-bold text-accent-color mb-4">💡 أمثلة عملية</h4>
+                        <div class="text-text-secondary bg-primary-light p-6 rounded-lg" id="level-examples"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div class="fade-in">
+                            <h4 class="text-lg font-bold text-white mb-4" data-translate="mainConcepts">المفاهيم الرئيسية</h4>
+                            <ul class="text-text-secondary space-y-2" id="level-concepts"></ul>
+                        </div>
+                        
+                        <!-- MODIFIED: Updated code block with better copy button placement -->
+                        <div class="fade-in relative">
+                            <h4 class="text-lg font-bold text-white mb-4" data-translate="codeExamples">أمثلة التعليمات البرمجية</h4>
+                            <div class="code-block relative">
+                                <button class="copy-code-btn absolute top-2 right-2 z-10" onclick="copyCode()" title="نسخ الكود">
+                                    <i class="fas fa-copy"></i> <span class="hidden sm:inline">نسخ</span>
+                                </button>
+                                <pre id="level-code"></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="code-editor-section" class="mt-12 hidden">
+                        <h4 class="text-xl font-bold text-accent-color mb-6 fade-in" data-translate="tryYourself">جرب بنفسك</h4>
+                        <div class="code-editor-container rounded-lg overflow-hidden">
+                            <div class="relative">
+                                <textarea id="code-editor" class="w-full p-4 bg-primary-light text-white min-h-40" placeholder="اكتب كود جافا هنا..." data-translate="codeEditorPlaceholder"></textarea>
+                                <button class="absolute top-2 right-2 bg-accent-color text-primary-dark p-2 rounded" onclick="copyEditorCode()" title="نسخ الكود">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="flex flex-col sm:flex-row justify-between p-4 bg-primary-medium">
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="btn-primary" id="run-btn" disabled onclick="runCode()">
+                                        <i class="fas fa-play mr-2"></i> <span data-translate="run">تشغيل</span>
+                                    </button>
+                                    <button class="btn-outline" onclick="checkCode()">
+                                        <i class="fas fa-check mr-2"></i> <span data-translate="check">تحقق</span>
+                                    </button>
+                                    <button class="btn-outline" onclick="clearEditor()">
+                                        <i class="fas fa-trash mr-2"></i> <span data-translate="clear">مسح</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="code-output" class="p-4 bg-primary-light text-white hidden">
+                                <span data-translate="output">الناتج:</span> <span id="output-text"></span>
+                            </div>
+                            <div id="code-error" class="p-4 bg-red-900 text-white hidden">
+                                <span data-translate="error">خطأ:</span> <span id="error-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold text-white mb-4 fade-in" data-translate="additionalResources">الموارد الإضافية</h4>
+                        <div id="additional-resources" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- سيتم ملؤها ديناميكيًا -->
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-container mt-12">
+                        <h3 class="text-xl font-bold text-accent-color mb-6 fade-in" data-translate="testYourKnowledge">اختبر معلوماتك</h3>
+                        <p class="text-text-secondary mb-4 fade-in" id="quiz-question"></p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="quiz-options-container">
+                            <!-- سيتم ملؤها ديناميكيًا -->
+                        </div>
+                        
+                        <div id="quiz-result" class="mt-6 text-center hidden">
+                            <p class="text-xl font-bold" id="result-text"></p>
+                            <button class="btn-outline mt-4" id="next-level-btn" onclick="goToNextLevel()">
+                                <span data-translate="nextLevel">المستوى التالي</span> <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+        
+    <!-- باقي المحتوى يبقى كما هو -->
+        
         <div id="intro-page" class="page">
             <section class="py-20">
                 <div class="container mx-auto px-4">
-                    <div class="flex items-center mb-8">
-                        <button class="btn-outline mr-4" onclick="changePage('home')">
-                            <i class="fas fa-arrow-right ml-2"></i> العودة للرئيسية
+                    <div class="flex items-center mb-8 fade-in">
+                        <button class="btn-outline mr-4" onclick="navigateTo('home')">
+                            <i class="fas fa-arrow-right ml-2"></i> <span data-translate="backToHome">العودة للرئيسية</span>
                         </button>
-                        <h2 class="text-3xl font-bold text-white">مقدمة لتعلم جافا</h2>
+                        <h2 class="text-3xl font-bold text-white" data-translate="introTitle">مقدمة لتعلم جافا</h2>
                     </div>
                     
                     <div class="bg-primary-medium rounded-2xl p-6">
-                        <div class="video-container">
-                            <!-- إضافة معرف للفيديو لتتمكن من التحكم به -->
+                        <div class="video-container fade-in">
                             <iframe id="intro-video" src="https://www.youtube.com/embed/mG4NLNZ37y4" frameborder="0" allowfullscreen></iframe>
                         </div>
                         
                         <div class="mt-8">
-                            <h3 class="text-xl font-bold text-accent-color mb-4">ما ستتعلمه في هذه الدورة</h3>
-                            <p class="text-text-secondary mb-6">
+                            <h3 class="text-xl font-bold text-accent-color mb-4 fade-in" data-translate="whatYouWillLearn">ما ستتعلمه في هذه الدورة</h3>
+                            <p class="text-text-secondary mb-6 fade-in" data-translate="introDescription">
                                 في دورة تعلم جافا مع زيد، ستتمكن من إتقان أساسيات البرمجة بلغة جافا بدءًا من المفاهيم الأساسية وصولاً إلى التقنيات المتقدمة. ستتعلم كيفية بناء تطبيقات قوية وفعالة باستخدام أحدث إصدارات جافا.
                             </p>
                             
                             <ul class="text-text-secondary space-y-2">
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> أساسيات لغة جافا وأنواع البيانات</li>
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> البرمجة الكائنية التوجه (OOP)</li>
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> التعامل مع الملفات وقواعد البيانات</li>
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> بناء واجهات المستخدم الرسومية</li>
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> برمجة الشبكات والتواصل</li>
-                                <li><i class="fas fa-check-circle text-success mr-2"></i> تطوير تطبيقات الويب باستخدام جافا</li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem1">أساسيات لغة جافا وأنواع البيانات</span></li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem2">البرمجة الكائنية التوجه (OOP)</span></li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem3">التعامل مع الملفات وقواعد البيانات</span></li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem4">بناء واجهات المستخدم الرسومية</span></li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem5">برمجة الشبكات والتواصل</span></li>
+                                <li class="fade-in"><i class="fas fa-check-circle text-success mr-2"></i> <span data-translate="introListItem6">تطوير تطبيقات الويب باستخدام جافا</span></li>
                             </ul>
                             
-                            <div class="mt-8 text-center">
-                                <button class="btn-primary px-8 py-3" onclick="changePage('levels')">
-                                    ابدأ رحلتك الآن <i class="fas fa-arrow-left ml-2"></i>
+                            <div class="mt-8 text-center fade-in">
+                                <button class="btn-primary px-8 py-3" onclick="navigateTo('levels')">
+                                    <span data-translate="startYourJourney">ابدأ رحلتك الآن</span> <i class="fas fa-arrow-left ml-2"></i>
                                 </button>
                             </div>
                         </div>
@@ -731,55 +1021,50 @@ public class DataTypesExample {
         </div>
     </div>
     
-    <!-- Footer -->
     <footer class="py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <div class="text-2xl font-bold text-accent-color mb-4">Zaid.<span class="java-logo">java</span></div>
-                    <p class="text-text-secondary">
+                    <div class="text-2xl font-bold text-accent-color mb-4">Zaid.<span class="java-logo" data-translate="javaWord">java</span></div>
+                    <p class="text-text-secondary" data-translate="footerDescription">
                         منصة تعليمية متخصصة في تعليم لغة جافا من الصفر إلى الاحتراف
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold text-white mb-4">روابط سريعة</h4>
+                    <h4 class="text-lg font-bold text-white mb-4" data-translate="quickLinks">روابط سريعة</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" onclick="changePage('home')" class="text-text-secondary hover:text-accent-color transition-colors">الرئيسية</a></li>
-                        <li><a href="#" onclick="changePage('levels')" class="text-text-secondary hover:text-accent-color transition-colors">المستويات</a></li>
-                        <li><a href="#" onclick="changePage('faq')" class="text-text-secondary hover:text-accent-color transition-colors">الأسئلة الشائعة</a></li>
-                        <li><a href="#" onclick="changePage('about')" class="text-text-secondary hover:text-accent-color transition-colors">عني</a></li>
+                        <li><a href="#home" onclick="navigateTo('home')" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="home">الرئيسية</a></li>
+                        <li><a href="#levels" onclick="navigateTo('levels')" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="levels">المستويات</a></li>
+                        <li><a href="#faq" onclick="navigateTo('faq')" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#about" onclick="navigateTo('about')" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="about">عني</a></li>
+                        <li><a href="#contact" onclick="navigateTo('contact')" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="contact">اتصل بنا</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="text-lg font-bold text-white mb-4">المستويات</h4>
+                    <h4 class="text-lg font-bold text-white mb-4" data-translate="nextStep">الخطوة التالية  </h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-text-secondary hover:text-accent-color transition-colors">المبتدئ</a></li>
-                        <li><a href="#" class="text-text-secondary hover:text-accent-color transition-colors">المتوسط</a></li>
-                        <li><a href="#" class="text-text-secondary hover:text-accent-color transition-colors">المتقدم</a></li>
-                        <li><a href="#" class="text-text-secondary hover:text-accent-color transition-colors">الكويزات</a></li>
-                    </ul>
+                        <li><a href="https://python.zaiddev.com/?page=home#"  class="text-text-secondary hover:text-accent-color transition-colors" data-translate="python">تعلم البايثون مع زيد</a></li>
                 </div>
                 
+               
+                
                 <div>
-                    <h4 class="text-lg font-bold text-white mb-4">تواصل معنا</h4>
+                    <h4 class="text-lg font-bold text-white mb-4" data-translate="getInTouch">تواصل معنا</h4>
                     <div class="flex space-x-4">
                         <a href="https://www.instagram.com/Zaid_10_7" target="_blank" class="text-text-secondary hover:text-accent-color text-xl"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/962799569573" target="_blank" class="text-text-secondary hover:text-accent-color text-xl"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="text-text-secondary hover:text-accent-color text-xl"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="text-text-secondary hover:text-accent-color text-xl"><i class="fab fa-telegram"></i></a>
+                        <a href="https://t.me/Zaid_10_7?text=مرحبا%20مهندس%20زيد%20هل%20يمكنك%20مساعدتي%20؟%20؟" target="_blank" class="text-text-secondary hover:text-accent-color text-xl"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
             </div>
             
             <div class="border-t border-gray-800 pt-8 text-center text-text-secondary">
-                <p>© 2025 Zaid Abu Al Shaar. جميع الحقوق محفوظة</p>
+                <p>© 2025 <span data-translate="zaidName">زيد أبو الشعر</span>. <span data-translate="allRightsReserved">جميع الحقوق محفوظة</span></p>
             </div>
         </div>
     </footer>
     
-    <!-- Back to Top Button -->
     <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-accent-color rounded-full flex items-center justify-center text-primary-dark shadow-lg transition-all opacity-0 invisible">
         <i class="fas fa-arrow-up"></i>
     </button>
