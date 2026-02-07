@@ -2671,6 +2671,14 @@ function copyCode() {
     showNotification(currentLanguage === 'ar' ? 'تم نسخ الكود بنجاح!' : 'Code copied successfully!', 'success');
 }
 
+function copyEditorCode() {
+    const editor = document.getElementById('code-editor');
+    if (editor && editor.value) {
+        copyToClipboard(editor.value);
+        showNotification(currentLanguage === 'ar' ? 'تم نسخ الكود بنجاح!' : 'Code copied successfully!', 'success');
+    }
+}
+
 function copyToClipboard(text) {
     const textarea = document.createElement('textarea');
     textarea.value = text;

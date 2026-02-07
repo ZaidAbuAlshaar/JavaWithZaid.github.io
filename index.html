@@ -1,19 +1,94 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaid.java - تعلم جافا مع زيد</title>
+    <title>Java | Zaid Abu Alshaar | زيد أبو الشعر - تعلم جافا</title>
+    <meta name="description" content="تعلم لغة جافا Java من الصفر إلى الاحتراف مع زيد أبو الشعر (Zaid Abu Alshaar). دروس تفاعلية، اختبارات، وأمثلة عملية لإتقان البرمجة بلغة جافا.">
+    <meta name="author" content="Zaid Abu Alshaar">
+    <meta name="keywords" content="Java, جافا, Zaid Abu Alshaar, زيد أبو الشعر, تعلم جافا, Learn Java, programming, برمجة">
+    <link rel="canonical" href="https://java.zaiddev.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Java | Zaid Abu Alshaar | زيد أبو الشعر">
+    <meta property="og:description" content="تعلم لغة جافا من الصفر إلى الاحتراف مع زيد أبو الشعر. دروس تفاعلية واختبارات لإتقان Java.">
+    <meta property="og:url" content="https://java.zaiddev.com/">
+    <meta property="og:image" content="https://java.zaiddev.com/assets/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Zaid.java - Learn Java with Zaid Abu Alshaar">
+    <meta property="og:site_name" content="Zaid.java">
+    <meta property="og:locale" content="ar_JO">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Java | Zaid Abu Alshaar | زيد أبو الشعر">
+    <meta name="twitter:description" content="تعلم لغة جافا من الصفر إلى الاحتراف مع زيد أبو الشعر. دروس تفاعلية واختبارات لإتقان Java.">
+    <meta name="twitter:image" content="https://java.zaiddev.com/assets/img/og-image.jpg">
+    <meta name="twitter:image:alt" content="Zaid.java - Learn Java with Zaid Abu Alshaar">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="/assets/icons/favicon-48x48.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#64ffda">
+
+    <!-- Fonts & Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Zaid Abu Alshaar",
+      "alternateName": ["زيد أبو الشعر", "زيد ابو الشعر", "Zaid Abu Al Shaar", "Zaid Alshaar", "Zaid AbuAlshaar"],
+      "url": "https://java.zaiddev.com/",
+      "image": "https://java.zaiddev.com/assets/img/zaid-abu-alshaar.jpg",
+      "jobTitle": "Computer Science Student & AR/VR/AI Developer",
+      "sameAs": [
+        "https://www.instagram.com/Zaid_10_7",
+        "https://t.me/Zaid_10_7"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Zaid.java",
+      "url": "https://java.zaiddev.com/",
+      "description": "منصة تعليمية لتعلم لغة جافا مع زيد أبو الشعر - Interactive Java learning platform by Zaid Abu Alshaar",
+      "inLanguage": ["ar", "en"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Java | Zaid Abu Alshaar | زيد أبو الشعر",
+      "url": "https://java.zaiddev.com/",
+      "description": "تعلم لغة جافا Java من الصفر إلى الاحتراف مع زيد أبو الشعر",
+      "inLanguage": "ar",
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://java.zaiddev.com/"
+      }
+    }
+    </script>
 </head>
 <body class="bg-primary-dark">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-accent-color focus:text-primary-dark focus:px-4 focus:py-2 focus:rounded focus:z-[999]">Skip to content</a>
     <div class="language-switcher">
         <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">
             <span class="lang-text">EN</span>
@@ -23,8 +98,8 @@
     
     <div class="bg-pattern"></div>
     
-    <header class="fixed top-0 left-0 w-full z-50">
-        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <header class="fixed top-0 left-0 w-full z-50" role="banner">
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between" aria-label="Main navigation">
             <div class="flex items-center">
                 <div class="text-2xl font-bold text-accent-color cursor-pointer" onclick="navigateTo('home')">
                     Zaid.<span class="java-logo" data-translate="javaWord">java</span>
@@ -65,7 +140,7 @@
         </div>
     </div>
     
-    <div class="pt-20 pb-12">
+    <main id="main-content" class="pt-20 pb-12">
         <div id="home-page" class="page active">
             <section class="hero">
                 <div class="container mx-auto px-4">
@@ -74,6 +149,7 @@
                             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">
                                 <span data-translate="heroTitle1">أتقن</span> <span class="java-logo" data-translate="javaWord">جافا</span> <span data-translate="heroTitle2">مع زيد</span>
                             </h1>
+                            <p class="text-sm text-text-secondary mb-2 fade-in">Zaid Abu Alshaar | زيد أبو الشعر</p>
                             <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto fade-in" data-translate="heroDescription">
                                 تعلم لغة جافا من الأساسيات إلى المفاهيم المتقدمة مع دروس تفاعلية واختبارات مصممة خصيصًا لك
                             </p>
@@ -333,7 +409,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div class="flex justify-center fade-in">
                             <div class="profile-img-container">
-                                <img src="Gemini_Generated_Image_24cw2824cw2824cw.png" alt="Zaid Abu Al Shaar" class="profile-img">
+                                <img src="/assets/img/zaid-abu-alshaar.jpg" alt="Zaid Abu Alshaar - زيد أبو الشعر" class="profile-img" width="200" height="200" loading="lazy">
                             </div>
                         </div>
                         
@@ -991,7 +1067,7 @@ try {
                     
                     <div class="bg-primary-medium rounded-2xl p-6">
                         <div class="video-container fade-in">
-                            <iframe id="intro-video" src="https://www.youtube.com/embed/mG4NLNZ37y4" frameborder="0" allowfullscreen></iframe>
+                            <iframe id="intro-video" src="https://www.youtube.com/embed/mG4NLNZ37y4" frameborder="0" allowfullscreen loading="lazy" title="Java course introduction video"></iframe>
                         </div>
                         
                         <div class="mt-8">
@@ -1019,9 +1095,9 @@ try {
                 </div>
             </section>
         </div>
-    </div>
-    
-    <footer class="py-12">
+    </main>
+
+    <footer class="py-12" role="contentinfo">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
@@ -1042,9 +1118,10 @@ try {
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-white mb-4" data-translate="nextStep">الخطوة التالية  </h4>
+                    <h4 class="text-lg font-bold text-white mb-4" data-translate="nextStep">الخطوة التالية</h4>
                     <ul class="space-y-2">
-                        <li><a href="https://python.zaiddev.com/?page=home#"  class="text-text-secondary hover:text-accent-color transition-colors" data-translate="python">تعلم البايثون مع زيد</a></li>
+                        <li><a href="https://python.zaiddev.com/?page=home#" class="text-text-secondary hover:text-accent-color transition-colors" data-translate="python">تعلم البايثون مع زيد</a></li>
+                    </ul>
                 </div>
                 
                
@@ -1069,6 +1146,6 @@ try {
         <i class="fas fa-arrow-up"></i>
     </button>
     
-    <script src="script.js"></script>
+    <script src="/js/script.js" defer></script>
 </body>
 </html>
